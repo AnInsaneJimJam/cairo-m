@@ -1,7 +1,8 @@
 use stwo_prover::core::fields::m31::{M31, P};
 
 /// Untyped input value that can be interpreted based on AbiType
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize)]
+#[serde(untagged)]
 pub enum InputValue {
     /// A numeric value that can be interpreted as felt, u32, bool, or pointer based on AbiType
     Number(i64),
@@ -42,7 +43,7 @@ impl From<u32> for InputValue {
 }
 
 /// Typed output value decoded from memory
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize)]
 pub enum CairoMValue {
     Felt(M31),
     Bool(bool),
